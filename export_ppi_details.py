@@ -61,7 +61,7 @@ def read_series_map(csv_path: str) -> List[Tuple[str, str]]:
     return DEFAULT_SERIES_MAP
 
 def chunked(lst: list, n: int):
-    """리스트를 n개 크기의チャン크로 나눕니다."""
+    """리스트를 n개로 나눕니다."""
     for i in range(0, len(lst), n):
         yield lst[i:i+n]
 

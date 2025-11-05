@@ -58,10 +58,9 @@ def read_series_map(csv_path: str) -> List[Tuple[str, str]]:
 
 
 def chunked(lst, n):
-    for i in range(0, len(lst)):
-        if i % n == 0:
-            yield lst[i:i+n]
-
+    """리스트를 n개 크기의 묶음으로 나눕니다."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
 
 def bls_payload(series_ids: List[str], start_year: int, end_year: int) -> Dict:
     payload = {
@@ -153,6 +152,7 @@ def main():
     #    키가 없어도 50개 이하로 쪼개서 요청
     batch_size = 50
     long_frames = []
+    print(f"Fetching data in batches of {batch_size}...")
     for batch in chunked(series_ids, batch_size):
         data = call_bls(batch, start_year, end_year)
         df_long = parse_bls_result(data, labels)
